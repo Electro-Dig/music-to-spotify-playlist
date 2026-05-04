@@ -1,4 +1,4 @@
-# Spotify Setup for Playlist Automation
+﻿# Spotify Setup for Playlist Automation
 
 Use this reference only when Spotify credentials are missing, OAuth fails, or the user asks how to obtain Client ID / Client Secret.
 
@@ -68,7 +68,7 @@ SPOTIFY_CLIENT_SECRET=your_client_secret
 Then pass it to the script if needed:
 
 ```powershell
-python ".codex\skills\music-source-to-playlist\scripts\create_spotify_playlist.py" --env-file ".env" --tracks "<article-folder>\spotify-query-items.jsonl" --dry-run
+python ".codex\skills\music-to-spotify-playlist\scripts\create_spotify_playlist.py" --env-file ".env" --tracks "<article-folder>\spotify-query-items.jsonl" --dry-run
 ```
 
 ## OAuth scopes

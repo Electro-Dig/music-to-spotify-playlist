@@ -1,9 +1,9 @@
----
-name: music-source-to-playlist
+﻿---
+name: music-to-spotify-playlist
 description: Use when the user provides a YouTube DJ set, Xiaohongshu card, chart screenshot, playlist screenshot, WeChat post, book/photo, text tracklist, or music links and wants music extraction, Spotify matching, or playlist creation.
 ---
 
-# music-source-to-playlist
+# music-to-spotify-playlist
 
 Convert music evidence from links, screenshots, articles, cards, charts, books, or tracklists into candidate items, Spotify-ready data, Spotify playlists, and optional notes/share posters.
 
@@ -132,19 +132,19 @@ Before playlist creation:
 Use the bundled script:
 
 ```powershell
-python ".codex\skills\music-source-to-playlist\scripts\create_spotify_playlist.py" --tracks "<article-folder>\spotify-query-items.jsonl" --name "<playlist-name>" --dry-run
+python ".codex\skills\music-to-spotify-playlist\scripts\create_spotify_playlist.py" --tracks "<article-folder>\spotify-query-items.jsonl" --name "<playlist-name>" --dry-run
 ```
 
 Then, only after confirmation:
 
 ```powershell
-python ".codex\skills\music-source-to-playlist\scripts\create_spotify_playlist.py" --tracks "<article-folder>\spotify-query-items.jsonl" --name "<playlist-name>"
+python ".codex\skills\music-to-spotify-playlist\scripts\create_spotify_playlist.py" --tracks "<article-folder>\spotify-query-items.jsonl" --name "<playlist-name>"
 ```
 
 Public playlist requires explicit user request:
 
 ```powershell
-python ".codex\skills\music-source-to-playlist\scripts\create_spotify_playlist.py" --tracks "<article-folder>\spotify-query-items.jsonl" --name "<playlist-name>" --public
+python ".codex\skills\music-to-spotify-playlist\scripts\create_spotify_playlist.py" --tracks "<article-folder>\spotify-query-items.jsonl" --name "<playlist-name>" --public
 ```
 
 Optional poster branch:

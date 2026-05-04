@@ -1,16 +1,16 @@
----
-name: music-source-to-playlist
+﻿---
+name: music-to-spotify-playlist
 description: Use when the user provides music screenshots, articles, YouTube DJ sets, Xiaohongshu cards, chart or playlist screenshots, books, text tracklists, or music links and wants extracted music items, Spotify matching, or a Spotify playlist.
 ---
 
-# music-source-to-playlist
+# music-to-spotify-playlist
 
 Turn music evidence from links, screenshots, articles, charts, books, or tracklists into candidate music items, Spotify-ready data, optional Spotify playlists, and optional notes/posters.
 
 ## Invocation
 
-- After installing this folder into a supported skill root, invoke this skill as `$music-source-to-playlist`.
-- `$` is the Codex skill prefix. `/` is for commands/built-ins; do not expect `/music-source-to-playlist` unless a separate wrapper command exists.
+- After installing this folder into a supported skill root, invoke this skill as `$music-to-spotify-playlist`.
+- `$` is the Codex skill prefix. `/` is for commands/built-ins; do not expect `/music-to-spotify-playlist` unless a separate wrapper command exists.
 - For Codex, install or symlink this folder under `~/.codex/skills/` or `~/.agents/skills/` so the app can discover it.
 
 ## Core rule
@@ -100,13 +100,13 @@ Before writing to Spotify, confirm:
 Dry-run:
 
 ```powershell
-python ".codex\skills\music-source-to-playlist\scripts\create_spotify_playlist.py" --tracks "<source-folder>\spotify-query-items.jsonl" --name "<playlist-name>" --dry-run
+python ".codex\skills\music-to-spotify-playlist\scripts\create_spotify_playlist.py" --tracks "<source-folder>\spotify-query-items.jsonl" --name "<playlist-name>" --dry-run
 ```
 
 Create private playlist:
 
 ```powershell
-python ".codex\skills\music-source-to-playlist\scripts\create_spotify_playlist.py" --tracks "<source-folder>\spotify-query-items.jsonl" --name "<playlist-name>"
+python ".codex\skills\music-to-spotify-playlist\scripts\create_spotify_playlist.py" --tracks "<source-folder>\spotify-query-items.jsonl" --name "<playlist-name>"
 ```
 
 Use `--public` only after explicit user request. If JSONL lacks `spotify_uri`, finish Stage 2 matching first or pass `--resolve-missing` during a reviewed dry-run.

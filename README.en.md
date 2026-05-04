@@ -1,4 +1,4 @@
-# music-source-to-playlist
+﻿# music-to-spotify-playlist
 
 <p align="right">
   <a href="./README.md"><img alt="中文" src="https://img.shields.io/badge/中文-切换-lightgrey"></a>
@@ -42,19 +42,19 @@ Spotify's current Web API docs say Web API use requires Premium. Development Mod
 Place this folder in a supported Codex skill root:
 
 ```text
-~/.codex/skills/music-source-to-playlist
+~/.codex/skills/music-to-spotify-playlist
 ```
 
 or:
 
 ```text
-~/.agents/skills/music-source-to-playlist
+~/.agents/skills/music-to-spotify-playlist
 ```
 
 Invoke it with:
 
 ```text
-$music-source-to-playlist
+$music-to-spotify-playlist
 ```
 
 ## Quick Start
@@ -69,7 +69,7 @@ $env:SPOTIFY_CLIENT_SECRET="your_client_secret"
 2. Ask your agent:
 
 ```text
-$music-source-to-playlist Turn the songs in this screenshot into a Spotify playlist
+$music-to-spotify-playlist Turn the songs in this screenshot into a Spotify playlist
 ```
 
 3. The agent extracts candidate tracks, reports low-confidence items, and asks whether to continue with Spotify matching.
@@ -77,19 +77,19 @@ $music-source-to-playlist Turn the songs in this screenshot into a Spotify playl
 4. Run a dry-run after matching:
 
 ```powershell
-python ".codex\skills\music-source-to-playlist\scripts\create_spotify_playlist.py" --tracks "<source-folder>\spotify-query-items.jsonl" --name "<playlist-name>" --dry-run
+python ".codex\skills\music-to-spotify-playlist\scripts\create_spotify_playlist.py" --tracks "<source-folder>\spotify-query-items.jsonl" --name "<playlist-name>" --dry-run
 ```
 
 5. Create a private playlist after review:
 
 ```powershell
-python ".codex\skills\music-source-to-playlist\scripts\create_spotify_playlist.py" --tracks "<source-folder>\spotify-query-items.jsonl" --name "<playlist-name>"
+python ".codex\skills\music-to-spotify-playlist\scripts\create_spotify_playlist.py" --tracks "<source-folder>\spotify-query-items.jsonl" --name "<playlist-name>"
 ```
 
 Create a public playlist only when explicitly requested:
 
 ```powershell
-python ".codex\skills\music-source-to-playlist\scripts\create_spotify_playlist.py" --tracks "<source-folder>\spotify-query-items.jsonl" --name "<playlist-name>" --public
+python ".codex\skills\music-to-spotify-playlist\scripts\create_spotify_playlist.py" --tracks "<source-folder>\spotify-query-items.jsonl" --name "<playlist-name>" --public
 ```
 
 ## Default Flow
@@ -103,7 +103,7 @@ Obsidian/Markdown output is optional and only used when note saving, archiving, 
 ## Project Structure
 
 ```text
-music-source-to-playlist/
+music-to-spotify-playlist/
   SKILL.md
   README.md
   README.en.md
