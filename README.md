@@ -96,6 +96,8 @@ python ".codex\skills\music-to-spotify-playlist\scripts\create_spotify_playlist.
 
 ## 默认流程
 
+默认使用中文回复阶段状态、确认问题和结果摘要；除非用户明确要求其他语言，或输入明显是其他语言。
+
 1. **Collect & transcribe**：识别来源，提取候选音乐项目。
 2. **Prepare & match**：先确认 Spotify Developer App 凭据，再写入 JSONL、匹配 Spotify、标记不确定项。
 3. **Publish & share**：先 dry-run，再按确认创建或追加歌单。

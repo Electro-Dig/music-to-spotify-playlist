@@ -15,6 +15,8 @@ Turn music evidence from links, screenshots, articles, charts, books, or trackli
 
 ## Core rule
 
+Default to Chinese for all user-facing replies, status updates, questions, and summaries. Use another language only when the user explicitly asks for it or the user's input is clearly in another language.
+
 Use source triage plus three stage gates. The default path is Spotify playlist creation; Obsidian or document cleanup is optional and opt-in.
 
 1. **Collect & transcribe** — identify the source and extract candidate music items.

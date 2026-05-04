@@ -96,6 +96,8 @@ python ".codex\skills\music-to-spotify-playlist\scripts\create_spotify_playlist.
 
 ## Default Flow
 
+User-facing replies, status updates, questions, and summaries default to Chinese unless the user explicitly asks for another language or the input is clearly in another language.
+
 1. **Collect & transcribe**: classify the source and extract candidate music items.
 2. **Prepare & match**: confirm Spotify Developer App credentials, write JSONL, match Spotify, and flag uncertain items.
 3. **Publish & share**: dry-run first, then create or update a playlist after confirmation.

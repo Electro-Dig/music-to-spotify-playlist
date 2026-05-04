@@ -9,6 +9,8 @@ Convert music evidence from links, screenshots, articles, cards, charts, books, 
 
 ## Core rule: source triage + stage gates
 
+Default to Chinese for user-facing replies, status updates, questions, and summaries. Use another language only when the user explicitly asks for it or the user's input is clearly in another language.
+
 Do **not** assume the input is a WeChat article or a Spotify-ready tracklist. First classify the source, then work in three stages. Stop after each stage for confirmation.
 
 1. **Collect & transcribe** → classify input, extract candidate music items, then stop.
