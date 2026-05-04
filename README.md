@@ -1,4 +1,4 @@
-﻿# music-to-spotify-playlist
+# music-to-spotify-playlist
 
 <p align="right">
   <a href="./README.md"><img alt="中文" src="https://img.shields.io/badge/中文-当前-blue"></a>

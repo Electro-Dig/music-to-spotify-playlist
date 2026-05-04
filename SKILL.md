@@ -1,4 +1,4 @@
-﻿---
+---
 name: music-to-spotify-playlist
 description: Use when the user provides music screenshots, articles, YouTube DJ sets, Xiaohongshu cards, chart or playlist screenshots, books, text tracklists, or music links and wants extracted music items, Spotify matching, or a Spotify playlist.
 ---

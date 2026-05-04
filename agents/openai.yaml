@@ -1,0 +1,4 @@
+interface:
+  display_name: "Music To Spotify Playlist"
+  short_description: "Create Spotify playlists from music screenshots and articles."
+  default_prompt: "Use $music-to-spotify-playlist to turn this music screenshot, article, or tracklist into a Spotify playlist."

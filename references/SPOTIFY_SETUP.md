@@ -1,4 +1,4 @@
-﻿# Spotify Setup for Playlist Automation
+# Spotify Setup for Playlist Automation
 
 Use this reference only when Spotify credentials are missing, OAuth fails, or the user asks how to obtain Client ID / Client Secret.
 
