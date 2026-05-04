@@ -16,7 +16,7 @@
 - 确认后创建新歌单或追加到已有歌单。
 - 可选保存 Obsidian/Markdown 笔记或生成分享海报。
 
-默认不整理 Obsidian 文档、不归档全文、不生成海报。多数场景直接走“识别音乐 -> 匹配 Spotify -> 创建歌单”的轻量流程。
+默认不整理 Obsidian 文档、不归档全文、不生成海报。多数场景直接走“识别音乐 -> 确认 Spotify 凭据 -> 匹配 Spotify -> 创建歌单”的轻量流程。
 
 ## 适合的场景
 
@@ -74,6 +74,8 @@ $music-to-spotify-playlist 帮我把这张截图里的歌做成 Spotify 歌单
 
 3. agent 会先提取候选曲目，列出低置信度项，然后询问是否继续 Spotify 匹配。
 
+   如果本地没有 Spotify Developer App 的 Client ID/Secret，流程会先停止并引导配置；不会用全网搜索替代 Spotify API 匹配。
+
 4. 匹配后先 dry-run：
 
 ```powershell
@@ -95,7 +97,7 @@ python ".codex\skills\music-to-spotify-playlist\scripts\create_spotify_playlist.
 ## 默认流程
 
 1. **Collect & transcribe**：识别来源，提取候选音乐项目。
-2. **Prepare & match**：写入 JSONL，匹配 Spotify，标记不确定项。
+2. **Prepare & match**：先确认 Spotify Developer App 凭据，再写入 JSONL、匹配 Spotify、标记不确定项。
 3. **Publish & share**：先 dry-run，再按确认创建或追加歌单。
 
 Obsidian/Markdown 整理是可选分支。只有明确需要“保存笔记、归档、整理成文档、放进 Obsidian”时才做。
@@ -120,7 +122,7 @@ music-to-spotify-playlist/
 
 Spotify 凭据和 OAuth token 只需要保存在本地环境中。脚本默认读取环境变量、`.env`，或显式传入的 `--credentials-note`；不会自动扫描私人 Obsidian 笔记。
 
-匹配和创建歌单时，脚本只会把曲目查询和歌单写入请求发送给 Spotify API。截图、公众号原文、私人聊天内容是否保存为 Markdown/Obsidian 笔记，始终是可选步骤。
+匹配和创建歌单时，脚本只会把曲目查询和歌单写入请求发送给 Spotify API。没有 Spotify 凭据时，skill 会停下来要求配置，不会改用网页搜索、歌词站或其他音乐数据库猜 Spotify URI。截图、公众号原文、私人聊天内容是否保存为 Markdown/Obsidian 笔记，始终是可选步骤。
 
 ## 云端和手机使用说明
 

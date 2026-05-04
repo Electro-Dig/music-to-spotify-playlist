@@ -2,6 +2,12 @@
 
 Use this reference only when Spotify credentials are missing, OAuth fails, or the user asks how to obtain Client ID / Client Secret.
 
+## Credential gate
+
+Before Spotify matching, ask whether the user already has a Spotify Developer App and local `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET`.
+
+If credentials are missing, stop the Spotify stage and help the user configure them. Do not search the web, lyrics sites, music databases, or public pages as a fallback for Spotify URI matching. Resume only after credentials are available locally.
+
 ## What the user needs
 
 To search tracks and create playlists with Spotify Web API, the user needs:
@@ -31,6 +37,7 @@ For shared GitHub use, assume each user needs to create their own Spotify Develo
 - Do not commit `.env`, token caches, Client Secrets, access tokens, or refresh tokens.
 - For open-source/shared use, each user should normally create their own Spotify Developer App.
 - Spotify development/quota modes can restrict who may use the app. Development Mode is for small allowlisted testing; wider access requires Spotify's quota/extension review process.
+- If the user has not created a Spotify Developer App, do not proceed to matching. Guide setup first.
 
 ## Create a Spotify Developer App
 

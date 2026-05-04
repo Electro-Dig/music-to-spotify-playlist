@@ -59,7 +59,11 @@ Candidate JSONL shape:
 {"source_type":"youtube_description","source_ref":"https://youtube.com/...","position":"00:05:42","rank":null,"item_type":"track","artist":"Drexciya","track":"Andreaen Sand Dunes","raw_text":"05:42 Drexciya - Andreaen Sand Dunes","confidence":"high","notes":""}
 ```
 
-End Stage 1 with a short status: source type, count, item-type summary, low-confidence items, and “Continue to Spotify matching?”
+End Stage 1 with a short status: source type, count, item-type summary, low-confidence items, and:
+
+```text
+Continue to Spotify matching? This requires a Spotify Developer App, Client ID, Client Secret, and usually Spotify Premium. Do you already have these configured locally?
+```
 
 Do not save an Obsidian note by default. If a note would be useful, ask: “Do you also want me to save a整理/Obsidian note? Default is no.”
 
@@ -67,17 +71,24 @@ Do not save an Obsidian note by default. If a note would be useful, ask: “Do y
 
 Use only after Stage 1 confirmation or when the user already provides tracks/JSONL.
 
-Preflight:
+Credential gate:
 
-- Check for `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` in environment, `.env`, or user-confirmed local credential notes.
-- If missing or OAuth fails, load `references/SPOTIFY_SETUP.md`.
-- If the user has never created a Spotify Developer App, explain that this is required before playlist creation.
+- Before any Spotify matching, ask whether the user already has a Spotify Developer App and local `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET`.
+- Tell the user Spotify Web API access currently requires Premium and playlist writes also require browser OAuth.
+- Check environment variables, `.env`, or an explicitly user-provided local credentials note only after the user confirms credentials should be available.
+- If credentials are missing, stop Stage 2 and load `references/SPOTIFY_SETUP.md`. Do not search the web or use non-Spotify sources as a fallback.
+- If the user has not created a Spotify Developer App, stop and guide setup. Resume Spotify matching only after credentials are configured.
+- Do not ask users to paste Client Secret into chat unless they explicitly choose that tradeoff; prefer environment variables or a local `.env`.
+
+Hard rule:
+
+- No Spotify credentials means no Spotify matching. Do not use Google, public webpages, lyrics sites, music databases, or general web search to guess Spotify URIs.
 
 Tasks:
 
 1. Write UTF-8 `spotify-query-items.jsonl`.
 2. Validate JSONL parses and item count matches Stage 1.
-3. Search Spotify and add `spotify_uri` plus metadata where possible; do not use uncertain first results without flagging them.
+3. Search the Spotify API and add `spotify_uri` plus metadata where possible; do not use uncertain first results without flagging them.
 4. Flag ambiguous/missing matches.
 5. Run dry-run before any playlist write.
 
@@ -135,3 +146,4 @@ Optional poster branch: ask first, use public/non-secret metadata only, save und
 - Saving private screenshots without consent.
 - Creating playlists before dry-run confirmation.
 - Printing secrets or token-cache content.
+- Falling back to web search when Spotify credentials are missing.

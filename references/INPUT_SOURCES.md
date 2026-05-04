@@ -35,7 +35,7 @@ C. 生成 Spotify 可匹配 JSONL
 D. 另存为 Obsidian/Markdown 笔记
 ```
 
-If the user provides a screenshot/article/link and asks for a playlist, the default is: extract items, match Spotify, dry-run, then ask before creating the playlist. Do not write to an Obsidian vault unless the user asks for a saved note.
+If the user provides a screenshot/article/link and asks for a playlist, the default is: extract items, confirm Spotify credentials, match Spotify via the official API, dry-run, then ask before creating the playlist. Do not write to an Obsidian vault unless the user asks for a saved note.
 
 ## Supported source types
 

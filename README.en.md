@@ -16,7 +16,7 @@ A Codex Skill that turns music screenshots, WeChat/articles, YouTube DJ sets, pl
 - Creates a new playlist or appends to an existing playlist after confirmation.
 - Optionally saves Obsidian/Markdown notes or generates share posters.
 
-The default flow is lightweight: extract music, match Spotify, dry-run, then create the playlist. Obsidian notes, article archiving, and posters are opt-in.
+The default flow is lightweight: extract music, confirm Spotify credentials, match Spotify, dry-run, then create the playlist. Obsidian notes, article archiving, and posters are opt-in.
 
 ## Use Cases
 
@@ -74,6 +74,8 @@ $music-to-spotify-playlist Turn the songs in this screenshot into a Spotify play
 
 3. The agent extracts candidate tracks, reports low-confidence items, and asks whether to continue with Spotify matching.
 
+   If local Spotify Developer App credentials are not available, the workflow stops and guides setup first. It does not use general web search as a substitute for Spotify API matching.
+
 4. Run a dry-run after matching:
 
 ```powershell
@@ -95,7 +97,7 @@ python ".codex\skills\music-to-spotify-playlist\scripts\create_spotify_playlist.
 ## Default Flow
 
 1. **Collect & transcribe**: classify the source and extract candidate music items.
-2. **Prepare & match**: write JSONL, match Spotify, and flag uncertain items.
+2. **Prepare & match**: confirm Spotify Developer App credentials, write JSONL, match Spotify, and flag uncertain items.
 3. **Publish & share**: dry-run first, then create or update a playlist after confirmation.
 
 Obsidian/Markdown output is optional and only used when note saving, archiving, or documentation is requested.
@@ -120,7 +122,7 @@ music-to-spotify-playlist/
 
 Spotify credentials and OAuth tokens stay in the local environment. The script reads only environment variables, `.env`, or an explicitly supplied `--credentials-note`; it does not automatically scan private Obsidian notes.
 
-During matching and playlist creation, the script sends track search queries and playlist write requests to the Spotify API. Saving screenshots, articles, or private chat content as Markdown/Obsidian notes is always optional.
+During matching and playlist creation, the script sends track search queries and playlist write requests to the Spotify API. If Spotify credentials are unavailable, the skill stops for setup instead of using web search, lyrics sites, or other music databases to guess Spotify URIs. Saving screenshots, articles, or private chat content as Markdown/Obsidian notes is always optional.
 
 ## Cloud and Mobile Use
 

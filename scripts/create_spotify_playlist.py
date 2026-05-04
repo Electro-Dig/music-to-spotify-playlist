@@ -156,7 +156,9 @@ def read_credentials(note_path: Path | None = None) -> Credentials:
 
     raise FileNotFoundError(
         "Spotify credentials not found. Set SPOTIFY_CLIENT_ID / SPOTIFY_CLIENT_SECRET, "
-        "pass --env-file, or explicitly pass --credentials-note."
+        "pass --env-file, or explicitly pass --credentials-note. "
+        "Create a Spotify Developer App first if you do not have a Client ID and Client Secret. "
+        "Do not use web search as a fallback for Spotify URI matching."
     )
 
 

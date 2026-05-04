@@ -12,7 +12,7 @@ Convert music evidence from links, screenshots, articles, cards, charts, books, 
 Do **not** assume the input is a WeChat article or a Spotify-ready tracklist. First classify the source, then work in three stages. Stop after each stage for confirmation.
 
 1. **Collect & transcribe** → classify input, extract candidate music items, then stop.
-2. **Prepare data & Spotify match** → structure JSONL, match Spotify, dry-run, then stop.
+2. **Prepare data & Spotify match** → confirm Spotify credentials first, structure JSONL, match Spotify, dry-run, then stop.
 3. **Publish & share** → create/update playlist and optional poster only after confirmation.
 
 This avoids long token-heavy runs and prevents continuing in the wrong direction after OCR, source-type, or matching errors.
@@ -24,7 +24,7 @@ This avoids long token-heavy runs and prevents continuing in the wrong direction
 - Prefer environment variables or a local `.env` ignored by git.
 - If credentials are missing, guide setup; do not pressure the user to paste secrets into chat.
 - If the user provides private chat screenshots, ask before saving them into Obsidian.
-- If the user asks for a playlist from an image/article/link, default to extraction → Spotify matching → dry-run → playlist confirmation. Ask about Obsidian/Markdown notes only when the user requests archiving or documentation.
+- If the user asks for a playlist from an image/article/link, default to extraction → Spotify credential confirmation → Spotify matching → dry-run → playlist confirmation. Ask about Obsidian/Markdown notes only when the user requests archiving or documentation.
 - If the user only says “整理一下” and has not specified destination, ask whether the output should be Spotify playlist, chat-only, JSONL, optional note, or poster.
 
 ## Supported input sources
@@ -74,7 +74,7 @@ End-of-stage response should be short:
 
 ```text
 Stage 1 complete. Source: YouTube DJ set description. Found 23 candidate tracks; 5 are Unknown ID.
-Continue to Stage 2: Spotify matching? This requires Spotify API credentials.
+Continue to Stage 2: Spotify matching? This requires a Spotify Developer App, Client ID, Client Secret, and usually Spotify Premium. Do you already have these configured locally?
 ```
 
 Do not call Spotify or create playlists in Stage 1.
@@ -83,21 +83,28 @@ Do not call Spotify or create playlists in Stage 1.
 
 Use only after Stage 1 is confirmed or when the user already provides a track list/JSONL.
 
-Preflight:
+Credential gate:
 
-1. Check for Spotify credentials:
+1. Ask whether the user already has a Spotify Developer App and local credentials configured:
    - `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET`
    - optional `.env`
    - optional local credentials note passed by user
-2. If credentials are missing, stop and guide the user using `references/SPOTIFY_SETUP.md`.
-3. Explain that users normally need their own Spotify Developer App.
-4. If the user asks about free accounts, explain the current Spotify docs require Premium for Web API use and Development Mode app owners must have Premium.
+2. Tell the user Spotify Web API access currently requires Premium, and playlist creation requires browser OAuth.
+3. Only after user confirmation, check environment variables, `.env`, or an explicitly provided local credentials note.
+4. If credentials are missing, stop and guide the user using `references/SPOTIFY_SETUP.md`.
+5. If the user has not created a Spotify Developer App, stop and guide setup. Resume only after credentials are configured.
+6. Do not ask users to paste Client Secret into chat unless they explicitly choose that tradeoff; prefer environment variables or a local `.env`.
+
+Hard stop:
+
+- No Spotify credentials means no Spotify matching.
+- Do not use Google, public webpages, lyrics sites, music databases, or general web search to guess Spotify URIs.
 
 Tasks:
 
 1. Write `spotify-query-items.jsonl` as UTF-8 JSON Lines.
 2. Validate JSONL parses.
-3. Search Spotify catalog and write back `spotify_uri`/metadata when possible.
+3. Search the Spotify API and write back `spotify_uri`/metadata when possible.
 4. Mark ambiguous or missing matches for user review.
 5. Run a dry-run before any playlist creation.
 
